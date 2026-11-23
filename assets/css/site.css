@@ -180,6 +180,7 @@ a { color: inherit; }
     transition: background-color .25s;
 }
 .lang-switch:hover { background: var(--accent); }
+a.lang-switch, a.lang-switch:visited { color: var(--white); text-decoration: none; }
 
 /* --- Header (homepage) --------------------------------------------------- */
 .hero {

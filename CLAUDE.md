@@ -20,7 +20,12 @@ The old host http://kaelig.castor.free.fr (HTTP only) just redirects here (see "
 - `site.js` picks the language from: `?lang=fr|en` → localStorage `pref-lang` → English (default; browser language ignored).
   Short links: https://ckaelig.github.io/en/ and /fr/ (`en/index.html`, `fr/index.html` redirect stubs).
   It rewrites internal `.htm/.html` links to carry `?lang=`, so the choice follows the visitor.
-- Language button: `<button class="lang-switch" data-action="toggle-lang">` (copy it from any page).
+- Language switch: two real links `<a class="lang-switch lang-fr" href="?lang=en" data-action="toggle-lang">English</a>` /
+  `<a class="lang-switch lang-en" href="?lang=fr" …>Français</a>` (copy from any page). They work even if a stale or
+  blocked site.js does not run; site.js intercepts them and switches in place. Pages carry `translate="no"` +
+  `<meta name="google" content="notranslate">` so browser auto-translation cannot fight the switch.
+- After editing `site.css` or `site.js`, run `python3 tools/stamp_assets.py` (updates the `?v=` cache-busting hash in
+  every page; check_site.py fails when a stamp is stale).
 - Detail pages can set `data-title-fr` / `data-title-en` on `<html>` for a translated `<title>`.
 
 ## Rules

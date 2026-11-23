@@ -165,9 +165,9 @@ def main():
         if rel not in STUBS:
             if p.body_lang:
                 rep.err(rel, f'<body lang="{p.body_lang}"> is hard-coded: site.js owns the language (on <html>)')
-            if not {"assets/js/site.js", "/assets/js/site.js"} & set(p.scripts):
+            if not {"assets/js/site.js", "/assets/js/site.js"} & {s.split("?")[0] for s in p.scripts}:
                 rep.err(rel, "does not load assets/js/site.js (language switch would not work)")
-            if not {"assets/css/site.css", "/assets/css/site.css"} & set(p.stylesheets):
+            if not {"assets/css/site.css", "/assets/css/site.css"} & {s.split("?")[0] for s in p.stylesheets}:
                 rep.err(rel, "does not load assets/css/site.css")
             if p.n_fr != p.n_en:
                 rep.warn(rel, f"{p.n_fr} .lang-fr vs {p.n_en} .lang-en elements — a translation may be missing")
@@ -234,6 +234,12 @@ def main():
                     break
             if code not in (200, 301, 302, 303, 307, 308, 403, 405, 429, 999):
                 rep.warn(where, f"external link → {code}: {url}")
+
+    # cache-busting stamps (?v=hash) must match the current site.css / site.js
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import stamp_assets
+    for rel in stamp_assets.stale_pages():
+        rep.err(rel, "stale ?v= stamp on site.css/site.js (run python3 tools/stamp_assets.py)")
 
     for line in rep.warnings:
         print(line)

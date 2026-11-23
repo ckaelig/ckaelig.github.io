@@ -140,7 +140,12 @@
             return;
         }
         var action = el.getAttribute('data-action');
-        if (action === 'toggle-lang') window.toggleLang();
+        if (action === 'toggle-lang') {
+            // The switch is a real link (?lang=xx) so it still works if this script
+            // is stale or blocked; when the script runs, switch in place instead.
+            e.preventDefault();
+            window.toggleLang();
+        }
         else if (action === 'toggle-menu') window.toggleMenu();
     });
 

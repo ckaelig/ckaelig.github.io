@@ -13,7 +13,8 @@ import unittest
 CHECK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check_site.py")
 
 GOOD_HEAD = """<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>t</title>
-<link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/site.js"></script></head>"""
+<link rel="stylesheet" href="assets/css/site.css?v=e3b0c44298"><script src="assets/js/site.js?v=e3b0c44298"></script></head>"""
+# e3b0c44298 = first 10 hex digits of sha256(b"") : the test assets are empty files
 
 
 def run(files):
@@ -90,6 +91,13 @@ class CheckSiteTests(unittest.TestCase):
         code, out = run(site('<a href="phd.htm" target="_blank" rel="noopener">t</a>',
                              {"phd.htm": GOOD_HEAD + "<body><a href=\"index.html\">b</a></body></html>"}))
         self.assertIn("opens in a new tab", out)
+
+    def test_stale_asset_stamp_is_an_error(self):  # cached old site.js broke the language button
+        files = site("")
+        files["assets/js/site.js"] = "/* changed */"
+        code, out = run(files)
+        self.assertEqual(code, 1)
+        self.assertIn("stale ?v= stamp", out)
 
     def test_latin1_file_is_an_error(self):
         code, out = run(site("", {"old.css": "caf\xe9".encode("latin-1")}))
