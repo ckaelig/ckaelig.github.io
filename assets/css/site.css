@@ -470,10 +470,6 @@ section[id] > h2 {   /* homepage section titles only (not detail-page headings) 
     margin-left: 0.2rem;
 }
 
-/* Credentials list */
-.cred-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; font-size: 0.85rem; }
-.cred-list a { font-weight: 700; }
-
 /* --- Footer -------------------------------------------------------------- */
 .site-footer {
     padding: 4rem 1.5rem 6rem;
