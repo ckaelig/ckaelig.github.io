@@ -224,7 +224,7 @@ a { color: inherit; }
 section { padding: 4.5rem 0; border-bottom: 1px solid var(--border); }
 section[id] { scroll-margin-top: calc(var(--nav-height) + 20px); }
 
-h2 {
+section[id] > h2 {   /* homepage section titles only (not detail-page headings) */
     font-size: 1.4rem;
     text-transform: uppercase;
     margin: 0 0 3rem;
@@ -564,7 +564,7 @@ h2 {
     .badge { position: static; display: inline-block; margin-bottom: 0.8rem; }
     .exp-description, .abstract { text-align: left; }
     section { padding: 3rem 0; }
-    h2 { margin-bottom: 2rem; }
+    section[id] > h2 { margin-bottom: 2rem; }
     .lang-switch { bottom: 1rem; right: 1rem; padding: 0.65rem 1.1rem; }
 }
 
@@ -590,3 +590,10 @@ h2 {
 
 .panel-grid + .chip-list { margin-top: 1rem; }
 .doc-link { vertical-align: middle; }
+
+/* Justified text leaves big gaps between words in narrow columns (detail pages on phones) */
+@media (max-width: 768px) {
+    html .content-card,
+    html .content-card p,
+    html .content-card li { text-align: left; hyphens: auto; }
+}
