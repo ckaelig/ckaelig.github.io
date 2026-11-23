@@ -11,7 +11,7 @@ The old host http://kaelig.castor.free.fr (HTTP only) just redirects here (see "
 - `index.htm`, `these.htm`: redirect stubs (old URLs). `404.html`: GitHub Pages 404 page.
 - `assets/css/site.css`: the ONLY place for design tokens (colours, fonts) and shared components.
 - `assets/js/site.js`: language switch, mobile menu, cookie consent / Statcounter. Loaded in `<head>` without defer.
-- PDFs, slides and images sit at the root or in `praexo/`, `rapport_these/`, `hydroacoustics/`, `infrasound_propagation/`, `credentials/`.
+- PDFs, slides and images sit at the root or in `praexo/`, `rapport_these/`, `hydroacoustics/`, `infrasound_propagation/`.
 - `tools/`: validator, tests, free.fr package builder, preview/backup/screenshot scripts. `tools/migrations/`: one-off scripts, history only, never re-run.
 
 ## Language system (the source of past bugs, so read this first)
@@ -38,6 +38,7 @@ The old host http://kaelig.castor.free.fr (HTTP only) just redirects here (see "
 - Never publish phone number, home address or date of birth (the validator blocks the known values).
 - Never add anything from the legacy folder `../kaelig.castor.free.fr/` without an explicit request:
   it mixes the site with personal, financial, family, employer and client documents.
+- Diplomas and recommendation letters are "available upon request" only: never publish the files (the validator blocks such paths).
 - Scanned PDFs/JPGs cannot be text-checked: look at them before publishing.
 
 ## free.fr

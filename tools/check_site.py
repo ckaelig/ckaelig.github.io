@@ -44,7 +44,7 @@ PRIVACY_PATTERNS = [
     (r"27(?:th|\s+novembre|\s+november)\s+1974|november\s+27(?:th)?,?\s+1974|27/11/1974", "date of birth"),
 ]
 PRIVATE_PATH_WORDS = ["achat_immo", "succession", "vaccin", "impot", "salaire", "bank", "macif",
-                      "natixis", "mutuelle", "passport", "passeport", "carte_identite", "rib", "mamy", "yvonne"]
+                      "natixis", "mutuelle", "credentials", "diplom", "lettre", "letters", "passport", "passeport", "carte_identite", "rib", "mamy", "yvonne"]
 
 ALLOWED_SCRIPT_HOSTS = {"cdn.jsdelivr.net", "www.statcounter.com"}
 BANNED_HOSTS = {"polyfill.io", "cdn.polyfill.io"}
