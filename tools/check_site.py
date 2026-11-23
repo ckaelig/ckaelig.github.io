@@ -25,6 +25,8 @@ import re
 import sys
 import urllib.parse
 import urllib.request
+import shutil
+import subprocess
 
 ROOT = os.path.abspath(os.environ.get("SITE_ROOT") or os.path.join(os.path.dirname(__file__), ".."))
 
@@ -51,6 +53,8 @@ UNSTYLED_OK = {"experience-section", "location", "patent-item", "publication-ite
 
 ALLOWED_SCRIPT_HOSTS = {"cdn.jsdelivr.net", "www.statcounter.com"}
 BANNED_HOSTS = {"polyfill.io", "cdn.polyfill.io"}
+
+PDFTOTEXT = shutil.which("pdftotext")  # poppler-utils; PDF privacy check skipped if absent
 
 TEXT_EXT = {".html", ".htm", ".css", ".js", ".json", ".txt", ".md", ".xml", ".svg"}
 
@@ -144,6 +148,15 @@ def main():
         for w in PRIVATE_PATH_WORDS:
             if re.search(rf"(?:^|[/_\-.]){w}", low):
                 rep.err(rel, f"path looks private ('{w}')")
+        if rel.lower().endswith(".pdf") and PDFTOTEXT:
+            # PDFs are public too (the published CVs once showed the phone number)
+            try:
+                txt = subprocess.run([PDFTOTEXT, "-q", path, "-"], capture_output=True, text=True, timeout=60).stdout
+            except subprocess.TimeoutExpired:
+                txt = ""
+            for pat, what in PRIVACY_PATTERNS:
+                if re.search(pat, txt, re.I):
+                    rep.err(rel, f"PDF text contains a {what} — never publish this")
         if os.path.splitext(rel)[1].lower() in TEXT_EXT:
             raw = open(path, "rb").read()
             try:
