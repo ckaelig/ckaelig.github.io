@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | Shallow-water Pekeris Waveguide Simulation</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent: #D35400;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 40px 20px;
+            transition: opacity 0.3s ease;
+        }
+        /* LOGIQUE DE LANGUE */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* BOUTON LANGUE */
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        /* NAVIGATION PAR ÉTAPES */
+        
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .step-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        
+        .step-nav a.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .step-nav a:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        /* HEADER */
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--slate);
+            margin: 15px 0;
+        }
+        /* CONTENT */
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+        
+        .simulation-info {
+            background: var(--white);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        /* COMPARISON FIGURES */
+        
+        .figure-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .figure {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            border-radius: 5px;
+            height: auto;
+        }
+        
+        .figcaption {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--slate);
+            margin-top: 15px;
+        }
+        
+        .sub-caption {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: 5px;
+        }
+        /* NAV BUTTONS */
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        
+        .nav-btn:hover {
+            color: var(--slate);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <nav class="step-nav">
+            <a href="hydroacoustics.htm">1</a>
+            <a href="hydroacoustics_2.htm">2</a>
+            <a href="#" class="active">3</a>
+            <a href="hydroacoustics_4.htm">4</a>
+            <a href="hydroacoustics_5.htm">5</a>
+            <a href="infrasound.htm">6</a>
+            <a href="infrasound_2.htm">7</a>
+            <a href="infrasound_3.htm">8</a>
+            <a href="infrasound_4.htm">9</a>
+            <a href="infrasound_5.htm">10</a>
+        </nav>
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">Shallow-Water Pekeris Waveguide Example</span>
+            <span class="lang-fr">Exemple en guide d'onde de Pekeris (eaux peu profondes)</span>
+            </span>
+            <h1 class="lang-en">Shallow Water Propagation Analysis</h1>
+            <h1 class="lang-fr">Analyse de la propagation en eaux peu profondes</h1>
+        </header>
+
+        <main class="content-card">
+            <div class="simulation-info">
+                <p class="lang-en">
+                    The acoustic field is initialized at <strong>100m-depth</strong> by a <strong>50Hz</strong> narrowband source pulse (5-cycle sine wave). The initial acoustic Mach number is <strong>0.005</strong>. The field is modulated by Gaussian
+                    envelopes in both depth and range.
+                </p>
+                <p class="lang-fr">
+                    Le champ acoustique est initialisé à <strong>100 m de profondeur</strong> par une impulsion source à bande étroite de <strong>50 Hz</strong> (sinusoïde de 5 cycles). Le nombre de Mach acoustique initial est de <strong>0,005</strong>.
+                    Le champ est modulé par des enveloppes gaussiennes en profondeur et en distance.
+                </p>
+            </div>
+
+            <p class="lang-en">
+                The simulations below track the pulse over a <strong>200km range</strong>, comparing linear and nonlinear behaviors in a shallow-water environment.
+            </p>
+            <p class="lang-fr">
+                Les simulations ci-dessous suivent l'impulsion sur une distance de <strong>200 km</strong>, comparant les comportements linéaires et non-linéaires en milieu peu profond.
+            </p>
+
+            <div class="figure-container">
+                <div class="figure">
+                    <img src="hydroacoustics/hydroacoustic_SHALLOW_WATER_LINEAR_PROPAGATION.gif" alt="Shallow Water Linear Propagation">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 3.a: Linear acoustic propagation (Shallow Water)</span>
+                        <span class="lang-fr">Fig. 3.a : Propagation acoustique linéaire (Eaux peu profondes)</span>
+                        <span class="sub-caption">(Nonlinear steepening term removed / Terme de raidissement supprimé)</span>
+                    </p>
+                </div>
+
+                <div class="figure">
+                    <img src="hydroacoustics/hydroacoustic_SHALLOW_WATER_NONLINEAR_PROPAGATION.gif" alt="Shallow Water Nonlinear Propagation">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 3.b: Nonlinear acoustic propagation (Shallow Water)</span>
+                        <span class="lang-fr">Fig. 3.b : Propagation acoustique non-linéaire (Eaux peu profondes)</span>
+                        <span class="sub-caption">(Full NPE model implementation / Modèle NPE complet)</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <a href="hydroacoustics_2.htm" class="nav-btn">
+                    <span class="lang-en">&laquo; Previous</span>
+                    <span class="lang-fr">&laquo; Précédent</span>
+                </a>
+                <a href="hydroacoustics_4.htm" class="nav-btn">
+                    <span class="lang-en">Next Step &raquo;</span>
+                    <span class="lang-fr">Étape suivante &raquo;</span>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to Resume</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            const currentLang = body.getAttribute('lang');
+            const newLang = (currentLang === 'en') ? 'fr' : 'en';
+
+            body.setAttribute('lang', newLang);
+            body.style.opacity = 0;
+            setTimeout(() => {
+                body.style.opacity = 1;
+            }, 50);
+        }
+    </script>
+
+</body>
+
+</html>

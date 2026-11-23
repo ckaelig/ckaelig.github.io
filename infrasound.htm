@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | Outdoor Sound Propagation - NPE</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+         :root {
+            --accent: #D35400;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+            --equation-bg: #f8f9fa;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 40px 20px;
+            transition: opacity 0.3s ease;
+        }
+        /* LOGIQUE DE LANGUE */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* NAVIGATION */
+        
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .step-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        
+        .step-nav a.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        /* HEADER */
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--slate);
+            margin: 15px 0;
+        }
+        /* CONTENT */
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+        /* EQUATION BOX */
+        
+        .equation-box {
+            background: var(--equation-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        /* SCHEMATIC */
+        
+        .schematic-box {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .schematic-box img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .caption {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        /* NAV CONTROLS */
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 600px) {
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <nav class="step-nav">
+            <a href="hydroacoustics.htm">1</a>
+            <a href="hydroacoustics_2.htm">2</a>
+            <a href="hydroacoustics_3.htm">3</a>
+            <a href="hydroacoustics_4.htm">4</a>
+            <a href="hydroacoustics_5.htm">5</a>
+            <a href="#" class="active">6</a>
+            <a href="infrasound_2.htm">7</a>
+            <a href="infrasound_3.htm">8</a>
+            <a href="infrasound_4.htm">9</a>
+            <a href="infrasound_5.htm">10</a>
+        </nav>
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">Atmospheric Adaptation</span>
+            <span class="lang-fr">Adaptation Atmosphérique</span>
+            </span>
+            <h1 class="lang-en">Outdoor Sound Propagation</h1>
+            <h1 class="lang-fr">Propagation Acoustique Extérieure</h1>
+        </header>
+
+        <main class="content-card">
+            <p class="lang-en">
+                The <strong>NPE model</strong> is adapted here to simulate sound propagation in the atmosphere. The free surface and the sediment layer of the ocean waveguide are replaced respectively by a <strong>sponge layer</strong> and a <strong>rigid bottom</strong>.
+            </p>
+            <p class="lang-fr">
+                Le modèle <strong>NPE</strong> est ici adapté pour simuler la propagation sonore dans l'atmosphère. La surface libre et la couche de sédiments du guide d'onde océanique sont remplacées respectivement par une <strong>couche absorbante (sponge)</strong>                et un <strong>fond rigide</strong>.
+            </p>
+
+            <div class="equation-box">
+                <p class="lang-en" style="margin-bottom:15px; font-weight:600; font-size:0.8rem; color:var(--accent);">NPE MODEL WITH THERMOVISCOUS ABSORPTION</p>
+                <p class="lang-fr" style="margin-bottom:15px; font-weight:600; font-size:0.8rem; color:var(--accent);">MODÈLE NPE AVEC ABSORPTION THERMOVISQUEUSE</p>
+
+                $$\frac{\partial R}{\partial t} = -\frac{\partial}{\partial x} \left( c_0 R + \frac{\beta}{2 \rho_0 c_0} R^2 \right) - \frac{c_0}{2} \int \nabla^2_\perp R \, dx + \frac{\delta}{2 \rho_0 c_0^3} \frac{\partial^2 R}{\partial x^2}$$
+            </div>
+
+            <div class="schematic-box">
+                <img src="infrasound_propagation/Nonlinear_Propagation_Equation_moving_frame.JPG" alt="NPE Moving Frame Schematic">
+                <p class="caption">
+                    <span class="lang-en">Fig. 6: Schematic representation of the NPE moving frame for outdoor propagation</span>
+                    <span class="lang-fr">Fig. 6 : Représentation schématique du repère mobile NPE pour la propagation extérieure</span>
+                </p>
+            </div>
+
+            <div class="nav-controls">
+                <a href="hydroacoustics_5.htm" class="nav-btn">
+                    <span class="lang-en">&laquo; Previous</span>
+                    <span class="lang-fr">&laquo; Précédent</span>
+                </a>
+                <a href="infrasound_2.htm" class="nav-btn">
+                    <span class="lang-en">Atmospheric Refraction &raquo;</span>
+                    <span class="lang-fr">Réfraction Atmosphérique &raquo;</span>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to Resume</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            const currentLang = body.getAttribute('lang');
+            const newLang = (currentLang === 'en') ? 'fr' : 'en';
+            body.setAttribute('lang', newLang);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | Atmospheric Spectral Evolution</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent: #E67E22;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #f4f7f9;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 40px 20px;
+        }
+        /* LANG LOGIC */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* NAV STEPS */
+        
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .step-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        
+        .step-nav a.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--slate);
+            margin: 15px 0;
+        }
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+        /* FIGURES */
+        
+        .figure-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .figure {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .figcaption {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--slate);
+            margin-top: 15px;
+        }
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <nav class="step-nav">
+            <a href="hydroacoustics.htm">1</a> ...
+            <a href="infrasound.htm">6</a>
+            <a href="infrasound_2.htm">7</a>
+            <a href="infrasound_3.htm">8</a>
+            <a href="#" class="active">9</a>
+            <a href="infrasound_5.htm">10</a>
+        </nav>
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">Frequency Domain Evolution</span>
+            <span class="lang-fr">Évolution du Domaine Fréquentiel</span>
+            </span>
+            <h1 class="lang-en">Spectrum vs. Altitude</h1>
+            <h1 class="lang-fr">Spectre en fonction de l'Altitude</h1>
+        </header>
+
+        <main class="content-card">
+            <p class="lang-en">
+                Figures 10.a and 10.b demonstrate the <strong>evolution of the spectrum as a function of altitude</strong>. These results highlight the frequency shifting and energy redistribution inherent to long-range atmospheric propagation.
+            </p>
+            <p class="lang-fr">
+                Les figures 10.a et 10.b montrent l'<strong>évolution du spectre en fonction de l'altitude</strong>. Ces résultats mettent en évidence le décalage fréquentiel et la redistribution d'énergie propres à la propagation atmosphérique longue
+                distance.
+            </p>
+
+            <div class="figure-stack">
+                <div class="figure">
+                    <img src="infrasound_propagation/Outdoor_Sound_Propagation_speclin.gif" alt="Linear Spectrum Altitude">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 10.a: Spectral evolution (Linear Propagation)</span>
+                        <span class="lang-fr">Fig. 10.a : Évolution spectrale (Propagation Linéaire)</span>
+                    </p>
+                </div>
+
+                <div class="figure">
+                    <img src="infrasound_propagation/Outdoor_Sound_Propagation_specnl.gif" alt="Nonlinear Spectrum Altitude">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 10.b: Spectral evolution (Nonlinear Propagation)</span>
+                        <span class="lang-fr">Fig. 10.b : Évolution spectrale (Propagation Non-linéaire)</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <a href="infrasound_3.htm" class="nav-btn">
+                    <span class="lang-en">&laquo; Previous</span>
+                    <span class="lang-fr">&laquo; Précédent</span>
+                </a>
+                <a href="infrasound_5.htm" class="nav-btn">
+                    <span class="lang-en">Final Results &raquo;</span>
+                    <span class="lang-fr">Résultats Finaux &raquo;</span>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to Resume</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            body.setAttribute('lang', (body.getAttribute('lang') === 'en') ? 'fr' : 'en');
+        }
+    </script>
+</body>
+
+</html>

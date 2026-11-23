@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | Time Reversal & Backpropagation</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent: #D35400;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+            --warning: #e74c3c;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 40px 20px;
+            transition: opacity 0.3s ease;
+        }
+        /* LOGIQUE DE LANGUE */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* BOUTON LANGUE */
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        /* NAVIGATION PAR ÉTAPES */
+        
+        .step-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .step-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        
+        .step-nav a.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .step-nav a:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        /* HEADER */
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--slate);
+            margin: 15px 0;
+        }
+        /* CONTENT */
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+        
+        .concept-box {
+            background: white;
+            border-left: 4px solid var(--slate);
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        /* FIGURES */
+        
+        .figure-group {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .figure {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            border-radius: 4px;
+            height: auto;
+        }
+        
+        .figcaption {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--slate);
+            margin-top: 15px;
+        }
+        
+        .status-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        
+        .tag-linear {
+            background: #e8f4fd;
+            color: #2980b9;
+        }
+        
+        .tag-nonlinear {
+            background: #fdf2f0;
+            color: var(--warning);
+        }
+        /* NAV BUTTONS */
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        @media (max-width: 600px) {
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <nav class="step-nav">
+            <a href="hydroacoustics.htm">1</a>
+            <a href="hydroacoustics_2.htm">2</a>
+            <a href="hydroacoustics_3.htm">3</a>
+            <a href="#" class="active">4</a>
+            <a href="hydroacoustics_5.htm">5</a>
+            <a href="infrasound.htm">6</a>
+            <a href="infrasound_2.htm">7</a>
+            <a href="infrasound_3.htm">8</a>
+            <a href="infrasound_4.htm">9</a>
+            <a href="infrasound_5.htm">10</a>
+        </nav>
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">Reciprocity & Time Reversal</span>
+            <span class="lang-fr">Réciprocité & Retournement Temporel</span>
+            </span>
+            <h1 class="lang-en">Backpropagation in Ocean Waveguides</h1>
+            <h1 class="lang-fr">Rétropropagation en guide d'onde océanique</h1>
+        </header>
+
+        <main class="content-card">
+            <div class="concept-box">
+                <p class="lang-en">
+                    This example illustrates <strong>time reversal</strong> by comparing backpropagated signals at a 10km-range. A 50Hz single-cycle sine source is used for initialization.
+                </p>
+                <p class="lang-fr">
+                    Cet exemple illustre le <strong>retournement temporel</strong> en comparant les signaux rétropropagés à une distance de 10 km. Une source sinusoïdale à cycle unique de 50 Hz est utilisée pour l'initialisation.
+                </p>
+            </div>
+
+            <p class="lang-en">
+                In the <strong>linear case</strong>, we observe excellent focusing at the source point. However, in the <strong>nonlinear case</strong>, steepening leads to shock attenuation, forbidding reciprocity and inducing visible demodulation effects
+                at the focal range.
+            </p>
+            <p class="lang-fr">
+                Dans le <strong>cas linéaire</strong>, on observe une excellente focalisation au point source. En revanche, dans le <strong>cas non-linéaire</strong>, le raidissement de l'onde entraîne une atténuation de choc qui rompt la réciprocité,
+                provoquant des effets de démodulation visibles à la focale.
+            </p>
+
+            <div class="figure-group">
+                <div class="figure">
+                    <span class="status-tag tag-linear">Linear Model</span>
+                    <img src="hydroacoustics/Ocean_acoustics_BACK_PROPAGATION_LINEAR.gif" alt="Linear Back Propagation">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 4.a: Linear backpropagation (NPE steepening term removed)</span>
+                        <span class="lang-fr">Fig. 4.a : Rétropropagation linéaire (terme de raidissement NPE supprimé)</span>
+                    </p>
+                </div>
+
+                <div class="figure">
+                    <span class="status-tag tag-nonlinear">Nonlinear Model</span>
+                    <img src="hydroacoustics/Ocean_acoustics_BACK_PROPAGATION_NONLINEAR.gif" alt="Nonlinear Back Propagation">
+                    <p class="figcaption">
+                        <span class="lang-en">Fig. 4.b: Nonlinear backpropagation (Full NPE model)</span>
+                        <span class="lang-fr">Fig. 4.b : Rétropropagation non-linéaire (modèle NPE complet)</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <a href="hydroacoustics_3.htm" class="nav-btn">
+                    <span class="lang-en">&laquo; Previous</span>
+                    <span class="lang-fr">&laquo; Précédent</span>
+                </a>
+                <a href="hydroacoustics_5.htm" class="nav-btn">
+                    <span class="lang-en">Next Step &raquo;</span>
+                    <span class="lang-fr">Étape suivante &raquo;</span>
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to Resume</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            const currentLang = body.getAttribute('lang');
+            const newLang = (currentLang === 'en') ? 'fr' : 'en';
+
+            body.setAttribute('lang', newLang);
+            body.style.opacity = 0;
+            setTimeout(() => {
+                body.style.opacity = 1;
+            }, 50);
+        }
+    </script>
+
+</body>
+
+</html>

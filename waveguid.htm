@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | LOA - Multi-scale Waveguides</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent: #D35400;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+        }
+        /* RESET & BASE */
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 60px 20px;
+            transition: opacity 0.3s ease;
+        }
+        /* --- LOGIQUE DE SWITCH DE LANGUE --- */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        /* BOUTON LANGUE */
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        /* HEADER */
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .institution {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--slate);
+        }
+        
+        .institution a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .institution a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        /* CONTENT */
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 45px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+        
+        .content-card p {
+            margin-bottom: 20px;
+        }
+        
+        .highlight-box {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 30px;
+            margin: 35px 0;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--slate);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        strong {
+            color: var(--slate);
+            font-weight: 700;
+        }
+        /* PUBLICATION BOX */
+        
+        .pub-box {
+            background: var(--slate);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .pub-info {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .pub-title {
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+        
+        .pdf-link {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .pdf-link:hover {
+            background: #E67E22;
+        }
+        /* FOOTER NAV */
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            .content-card {
+                padding: 25px;
+            }
+            .pub-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">Research Project (4 Months)</span>
+            <span class="lang-fr">Projet de Recherche (4 mois)</span>
+            </span>
+
+            <h1 class="lang-en">Acoustical propagation into multi-scale environments</h1>
+            <h1 class="lang-fr">Propagation acoustique en milieux multi-échelles</h1>
+
+            <div class="institution">
+                <a href="http://www.loa.espci.fr/" target="_blank">Laboratoire Ondes et Acoustique (LOA)</a>
+                <div style="font-weight: 400; color: var(--text-muted); margin-top: 5px;">ESPCI Paris, FRANCE</div>
+            </div>
+        </header>
+
+        <main class="content-card">
+
+            <p class="lang-en">
+                Acoustical propagation in a waveguide can be considered <strong>unidimensional</strong> if the longitudinal dimensions and wavelengths are much greater than the transversal ones. This approximation allows for the study of acoustical <strong>quadripoles</strong>                in series or parallel, as seen in wind instruments.
+            </p>
+            <p class="lang-fr">
+                La propagation acoustique dans un guide d'ondes peut être considérée comme <strong>unidimensionnelle</strong> si les dimensions longitudinales et les longueurs d'onde sont bien supérieures aux dimensions transversales. Cette approximation
+                permet d'étudier la propagation via des <strong>quadripôles</strong> acoustiques en série ou parallèle, comme pour les instruments à vent.
+            </p>
+
+            <div class="highlight-box">
+                <span class="lang-en">"It is possible to consider an acoustic tube as an <strong>acoustical filter</strong>, similar to electric quadripole chains, where specific frequency bands are favored and better transmitted."</span>
+                <span class="lang-fr">"Il est possible de considérer un tube acoustique comme un <strong>filtre acoustique</strong>, similairement aux chaînes de quadripôles électriques, où certaines bandes de fréquences sont favorisées et mieux transmises."</span>
+            </div>
+
+            <p class="lang-en">
+                The core of this study focuses on <strong>hierarchical structures</strong> (prefractals), such as the <strong>Cantor set</strong>. These structures are "self-similar" across several scales: a magnification of a part reveals the same geometry
+                as the whole. Such models help represent propagation in extremely porous media with complex structures, like <strong>silica aerogels</strong>.
+            </p>
+            <p class="lang-fr">
+                Le cœur de cette étude porte sur les <strong>structures hiérarchiques</strong> (préfractales), telles que l'<strong>ensemble de Cantor</strong>. Ces structures sont "auto-similaires" sur plusieurs échelles : un agrandissement d'une partie
+                révèle la même géométrie que le tout. Ces modèles permettent de représenter la propagation dans des milieux extrêmement poreux à structure complexe, comme les <strong>aérogels de silice</strong>.
+            </p>
+
+            <p class="lang-en">
+                <strong>Project Objectives:</strong> We developed a model for acoustical propagation in a Cantor hierarchical structure within the <strong>time domain</strong>. Using impedance measurements, we optimized simulations and compared them with
+                experimental data to evaluate the audible characteristics of hierarchical versus random structures.
+            </p>
+            <p class="lang-fr">
+                <strong>Objectifs du projet :</strong> Nous avons développé une modélisation de la propagation dans une structure hiérarchique de Cantor dans le <strong>domaine temporel</strong>. Par des mesures d'impédance, nous avons optimisé les simulations
+                et réalisé des comparaisons avec des données expérimentales pour évaluer les caractéristiques audibles des structures hiérarchiques par rapport aux structures aléatoires.
+            </p>
+
+        </main>
+
+        <div class="pub-box">
+            <div class="pub-info">
+                <span class="pub-title">Physical Review E, vol. 67, 066609 (2003)</span> Gibiat V., Barjau A., Castor K., Bertaud du Chazaud E. <br>
+                <em>Acoustical propagation in a prefractal wave-guide.</em>
+            </div>
+            <a href="GIBIAT_BARJAU_CASTOR_PhysRevE_67_066609.pdf" target="_blank" class="pdf-link">
+                PDF <span>(320kb)</span>
+            </a>
+        </div>
+
+        <footer class="nav-footer">
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to CV</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            const currentLang = body.getAttribute('lang');
+            const newLang = (currentLang === 'en') ? 'fr' : 'en';
+
+            body.setAttribute('lang', newLang);
+            body.style.opacity = 0;
+            setTimeout(() => {
+                body.style.opacity = 1;
+            }, 50);
+        }
+    </script>
+
+</body>
+
+</html>

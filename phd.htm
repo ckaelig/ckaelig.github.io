@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaëlig CASTOR | PhD - Acoustic Sources & Corona Discharges</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+         :root {
+            --accent: #D35400;
+            --slate: #2C3E50;
+            --text: #333;
+            --text-muted: #666;
+            --border: #eee;
+            --bg-light: #fdfcfb;
+            --white: #ffffff;
+        }
+        /* RESET & BASE */
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--white);
+            padding: 60px 20px;
+            transition: opacity 0.3s ease;
+        }
+        /* LOGIQUE DE LANGUE */
+        
+        body[lang="en"] .lang-fr {
+            display: none !important;
+        }
+        
+        body[lang="fr"] .lang-en {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: var(--slate);
+            color: var(--white);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        /* HEADER */
+        
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .institution-link {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--slate);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+        /* THESIS PDF BUTTON */
+        
+        .pdf-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 800;
+            margin: 20px 0;
+            transition: 0.3s;
+        }
+        
+        .pdf-cta:hover {
+            background: var(--slate);
+            transform: scale(1.02);
+        }
+        /* CONTENT SECTIONS */
+        
+        .content-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+        
+        h2 {
+            color: var(--slate);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        /* IMAGE GALLERY GRID */
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .img-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .img-item img {
+            width: 100%;
+            border-radius: 4px;
+            transition: 0.3s;
+            cursor: zoom-in;
+        }
+        
+        .img-item img:hover {
+            filter: brightness(0.9);
+        }
+        
+        .img-caption {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 10px;
+            display: block;
+            text-transform: uppercase;
+        }
+        
+        .full-width-img {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        strong {
+            color: var(--slate);
+        }
+        
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body lang="en">
+
+    <div class="lang-switch">
+        <button class="lang-btn" onclick="toggleLang()">FR / EN</button>
+    </div>
+
+    <div class="container">
+
+        <header>
+            <span class="tag">
+                <span class="lang-en">PhD in Acoustics — 2001</span>
+            <span class="lang-fr">Doctorat en Acoustique — 2001</span>
+            </span>
+
+            <h1 class="lang-en">Characterization of acoustic sources associated with negative corona discharges</h1>
+            <h1 class="lang-fr">Caractérisation des sources acoustiques associées aux décharges couronne négatives</h1>
+
+            <p>
+                <a href="http://laum.univ-lemans.fr" class="institution-link">Laboratoire d'Acoustique de l'Université du Maine (LAUM)</a><br>
+                <span style="color: var(--text-muted);">Le Mans, FRANCE</span>
+            </p>
+
+            <a href="rapport_these/these_castor.pdf" class="pdf-cta">
+                <span class="lang-en">Download Thesis Report (French)</span>
+                <span class="lang-fr">Télécharger le rapport de thèse</span>
+            </a>
+        </header>
+
+        <section class="content-card">
+            <h2 class="lang-en">From Mechanical to Direct Transduction</h2>
+            <h2 class="lang-fr">De la transduction mécanique à la transduction directe</h2>
+
+            <p class="lang-en">
+                Classical electroacoustic transducers (electrostatic, piezoelectric, etc.) create acoustic waves through mechanical vibrations acting on air molecules. However, these systems face limitations: mass of moving parts, diaphragm inertia, and mechanical failure.
+                <strong>"Plasma" loudspeakers</strong>, having no membrane at all, represent an "ultimate" solution.
+            </p>
+            <p class="lang-fr">
+                Les transducteurs électroacoustiques classiques (électrostatiques, piézoélectriques, etc.) créent l'onde acoustique par la vibration d'une pièce mécanique. Cependant, ces systèmes rencontrent des limites : masse des parties mobiles, inertie du diaphragme
+                et usure mécanique. Le haut-parleur à <strong>"Plasma"</strong>, dépourvu de toute membrane, apparaît comme une solution ultime.
+            </p>
+
+            <div class="img-item" style="max-width: 600px; margin: 30px auto;">
+                <img src="principle.jpg" alt="Principle of Plasma Transduction">
+                <a href="principle.htm" class="img-caption">> Enlargement / Agrandissement</a>
+            </div>
+
+            <p class="lang-en">
+                Gas discharge transducers offer <strong>"direct transduction"</strong> (no moving parts) and a <strong>"volumic"</strong> source character. Their small size allows for use in confined or harsh environments, such as high-temperature mediums.
+            </p>
+            <p class="lang-fr">
+                La technologie des décharges gazeuses permet une <strong>"transduction directe"</strong> (sans pièce mobile) et un caractère <strong>"volumique"</strong> de la source. Leur petite taille permet une utilisation en milieux confinés ou hostiles
+                (hautes températures).
+            </p>
+        </section>
+
+        <section class="content-card">
+            <h2 class="lang-en">Physical Mechanisms: Heat and Momentum</h2>
+            <h2 class="lang-fr">Mécanismes physiques : Chaleur et Quantité de mouvement</h2>
+
+            <p class="lang-en">
+                Air ionization is obtained by applying high DC voltage between electrodes (e.g., a needle facing a plane). Depending on the configuration, interactions lead to two predominant phenomena:
+                <br>1. <strong>Joule Heat Source:</strong> Predominant in the "ionization region" (isotropic transfer).
+                <br>2. <strong>Electric Wind:</strong> Momentum transfer in the "drift region" creating a directional gas flow.
+            </p>
+            <p class="lang-fr">
+                L'ionisation de l'air est obtenue par une haute tension continue entre électrodes (pointe-plan). Selon la configuration, les interactions mènent à deux phénomènes prédominants :
+                <br>1. <strong>Source de chaleur Joule :</strong> Prédominante dans la "zone d'ionisation" (transfert isotrope).
+                <br>2. <strong>Vent électrique :</strong> Transfert de quantité de mouvement dans la "zone de dérive" créant un flux directionnel.
+            </p>
+
+            <div class="image-grid">
+                <div class="img-item">
+                    <img src="gap.jpg" alt="Electrode Gap">
+                    <a href="gap.htm" class="img-caption">> Electrode Gap / Espace inter-électrodes</a>
+                </div>
+                <div class="img-item">
+                    <img src="acmodel.jpg" alt="Acoustic Model">
+                    <a href="acmodel.htm" class="img-caption">> Acoustic Model / Modèle acoustique</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <h2 class="lang-en">Research Contributions & Methodology</h2>
+            <h2 class="lang-fr">Contributions de recherche et méthodologie</h2>
+
+            <p class="lang-en">
+                This PhD improved <strong>electroacoustic efficiency</strong> by optimizing transducer configurations. A key contribution was modeling the drift region as a <strong>truncated conical region</strong>, matching visual discharge observations.
+            </p>
+            <p class="lang-fr">
+                Cette thèse a permis d'améliorer le <strong>rendement électroacoustique</strong> en optimisant la configuration du transducteur. Une contribution clé fut la modélisation de la zone de dérive comme une <strong>zone conique tronquée</strong>,
+                en accord avec les observations visuelles.
+            </p>
+
+            <p class="lang-en">
+                We also utilized <strong>Laser Doppler Anemometry (LDA)</strong> to characterize the "electric wind" and acoustical velocity. Unlike microphones, this optical method is insensitive to nuisance electromagnetic radiation.
+            </p>
+            <p class="lang-fr">
+                Nous avons également utilisé l'<strong>Anémométrie Laser Doppler (LDA)</strong> pour caractériser le vent électrique et la vitesse acoustique. Contrairement aux microphones, cette méthode optique est insensible aux perturbations électromagnétiques.
+            </p>
+
+            <div class="img-item">
+                <img src="mesald_ang.JPG" alt="LDA Measurements">
+                <a href="mesald_ang.htm" class="img-caption">> Laser Doppler Anemometry / Mesures LDA</a>
+            </div>
+        </section>
+
+        <footer>
+            <a href="index.htm#experience" class="back-link">
+                <span class="lang-en">← Back to CV</span>
+                <span class="lang-fr">← Retour au CV</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            const currentLang = body.getAttribute('lang');
+            const newLang = (currentLang === 'en') ? 'fr' : 'en';
+
+            body.setAttribute('lang', newLang);
+            body.style.opacity = 0;
+            setTimeout(() => {
+                body.style.opacity = 1;
+            }, 50);
+        }
+    </script>
+
+</body>
+
+</html>
