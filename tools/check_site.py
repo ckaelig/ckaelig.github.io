@@ -46,6 +46,9 @@ PRIVACY_PATTERNS = [
 PRIVATE_PATH_WORDS = ["achat_immo", "succession", "vaccin", "impot", "salaire", "bank", "macif",
                       "natixis", "mutuelle", "credentials", "diplom", "lettre", "letters", "passport", "passeport", "carte_identite", "rib", "mamy", "yvonne"]
 
+# Classes used only as semantic hooks (never styled on purpose)
+UNSTYLED_OK = {"experience-section", "location", "patent-item", "publication-item", "teaching-section", "nav-footer"}
+
 ALLOWED_SCRIPT_HOSTS = {"cdn.jsdelivr.net", "www.statcounter.com"}
 BANNED_HOSTS = {"polyfill.io", "cdn.polyfill.io"}
 
@@ -154,8 +157,19 @@ def main():
                     line = text.count("\n", 0, m.start()) + 1
                     rep.err(f"{rel}:{line}", f"contains a {what} — never publish this")
 
+    css_path = os.path.join(ROOT, "assets", "css", "site.css")
+    shared_css = open(css_path, encoding="utf-8").read() if os.path.exists(css_path) else ""
+    defined = set(re.findall(r"\.([A-Za-z][\w-]*)", re.sub(r"/\*.*?\*/", "", shared_css, flags=re.S)))
+
     for rel in pages:
         text = open(os.path.join(ROOT, rel), encoding="utf-8", errors="replace").read()
+        # classes with no CSS anywhere = a design block silently lost (skills cards, Nov. 2026)
+        live = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+        page_defined = defined | set(re.findall(r"\.([A-Za-z][\w-]*)", " ".join(re.findall(r"<style>(.*?)</style>", live, re.S))))
+        used = {c for cl in re.findall(r'class="([^"]*)"', live) for c in cl.split()}
+        for c in sorted(used - page_defined - UNSTYLED_OK):
+            if not c.startswith("lang-"):
+                rep.warn(rel, f"class '{c}' is used but defined in no stylesheet")
         p = Page()
         p.feed(text)
         base_dir = os.path.dirname(rel)

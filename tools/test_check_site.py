@@ -99,6 +99,10 @@ class CheckSiteTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("stale ?v= stamp", out)
 
+    def test_class_without_css_warns(self):  # skills cards lost their styles
+        code, out = run(site('<div class="card-grid">x</div>'))
+        self.assertIn("class 'card-grid' is used but defined in no stylesheet", out)
+
     def test_latin1_file_is_an_error(self):
         code, out = run(site("", {"old.css": "caf\xe9".encode("latin-1")}))
         self.assertEqual(code, 1)
