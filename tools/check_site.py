@@ -190,7 +190,7 @@ def main():
                         rep.err(where, "CDN script must pin an exact version (pkg@x.y.z)")
                 if tag == "a" and a.get("target") == "_blank" and "noopener" not in (a.get("rel") or ""):
                     rep.warn(where, f"target=_blank without rel=noopener: {url}")
-                if attr != "data-href":
+                if attr != "data-href" and "preconnect" not in (a.get("rel") or "") and host != "ckaelig.github.io":
                     external.setdefault(url, where)
                 continue
             if pu.scheme:
@@ -221,13 +221,17 @@ def main():
         print(f"Checking {len(external)} external links…", file=sys.stderr)
         for url, where in sorted(external.items()):
             u = "https:" + url if url.startswith("//") else url
-            try:
-                req = urllib.request.Request(u, method="HEAD", headers={"User-Agent": "Mozilla/5.0 (site link checker)"})
-                code = urllib.request.urlopen(req, timeout=15).status
-            except urllib.error.HTTPError as e:
-                code = e.code
-            except Exception as e:  # noqa: BLE001
-                code = type(e).__name__
+            code = None
+            for method in ("HEAD", "GET"):  # some servers reject HEAD (404/405) but serve GET
+                try:
+                    req = urllib.request.Request(u, method=method, headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/130 Safari/537.36"})
+                    code = urllib.request.urlopen(req, timeout=15).status
+                except urllib.error.HTTPError as e:
+                    code = e.code
+                except Exception as e:  # noqa: BLE001
+                    code = type(e).__name__
+                if code in (200, 301, 302, 303, 307, 308):
+                    break
             if code not in (200, 301, 302, 303, 307, 308, 403, 405, 429, 999):
                 rep.warn(where, f"external link → {code}: {url}")
 
