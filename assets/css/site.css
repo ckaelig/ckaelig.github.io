@@ -471,6 +471,86 @@ section[id] > h2 {   /* homepage section titles only (not detail-page headings) 
     margin-left: 0.2rem;
 }
 
+/* --- Skill cards ("Expertise & Compétences") — restored verbatim from the
+   original April 2026 stylesheet; transition added because the old global
+   `* { transition: all }` rule was removed. ----------------------------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 2rem;
+}
+
+.card {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:has(.card-link:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent);
+}
+
+.tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 2rem;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    width: fit-content;
+}
+
+.card-link::after {
+    content: '→';
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    color: var(--accent);
+}
+
+.card-link::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.card-link:hover {
+    color: var(--accent);
+}
+
+.card-link:hover::before {
+    width: 100%;
+}
+
+.card-link:hover::after {
+    transform: translateX(5px);
+}
+
+.card { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+
 /* --- Footer -------------------------------------------------------------- */
 .site-footer {
     padding: 4rem 1.5rem 6rem;
