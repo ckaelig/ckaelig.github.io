@@ -196,11 +196,25 @@ def cmd_cleanup(ftp, yes):
         return
     if missing:
         sys.exit("ABORT: some files have no local copy; nothing deleted")
+    refused = []
+    n_files = n_dirs = 0
     for p, _ in files:
-        ftp.delete(p)
+        try:
+            ftp.delete(p)
+            n_files += 1
+        except ftplib.error_perm as e:  # e.g. free.fr's own read-only notice file
+            refused.append(f"{local_name(p)}: {e}")
+        if n_files and n_files % 500 == 0:
+            print(f"  deleted {n_files}/{len(files)}", flush=True)
     for p in dirs:
-        ftp.rmd(p)
-    print(f"deleted {len(files)} files and {len(dirs)} folders")
+        try:
+            ftp.rmd(p)
+            n_dirs += 1
+        except ftplib.error_perm as e:
+            refused.append(f"{local_name(p)}/: {e}")
+    print(f"deleted {n_files} files and {n_dirs} folders; refused by the server: {len(refused)}")
+    for r in refused[:20]:
+        print("  kept", r)
 
 
 def main():
