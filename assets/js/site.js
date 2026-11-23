@@ -6,7 +6,7 @@
    Language resolution order:
      1. ?lang=fr|en in the URL (shareable links, survives blocked storage)
      2. the visitor's last choice (localStorage "pref-lang")
-     3. the browser language (fr* -> fr, anything else -> en)
+     3. English (site default; the browser language is NOT used)
    Internal links (.htm/.html) get ?lang=… so the choice follows the
    visitor from page to page, even when storage is unavailable.
    ========================================================================== */
@@ -33,8 +33,7 @@
         if (fromUrl) return fromUrl;
         var saved = storageGet(KEY);
         if (LANGS.indexOf(saved) !== -1) return saved;
-        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'fr';
-        return /^fr\b/i.test(nav) ? 'fr' : 'en';
+        return 'en';  // default language of the site (owner's choice, Nov. 2026)
     }
 
     var lang = detectLang();

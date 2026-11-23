@@ -17,7 +17,8 @@ The old host http://kaelig.castor.free.fr (HTTP only) just redirects here (see "
 ## Language system (the source of past bugs, so read this first)
 - Every translatable piece exists twice: `<span class="lang-fr">…</span><span class="lang-en">…</span>`.
   CSS hides the other language using `html[lang]`. Never set `lang` on `<body>`.
-- `site.js` picks the language from: `?lang=fr|en` → localStorage `pref-lang` → browser language.
+- `site.js` picks the language from: `?lang=fr|en` → localStorage `pref-lang` → English (default; browser language ignored).
+  Short links: https://ckaelig.github.io/en/ and /fr/ (`en/index.html`, `fr/index.html` redirect stubs).
   It rewrites internal `.htm/.html` links to carry `?lang=`, so the choice follows the visitor.
 - Language button: `<button class="lang-switch" data-action="toggle-lang">` (copy it from any page).
 - Detail pages can set `data-title-fr` / `data-title-en` on `<html>` for a translated `<title>`.

@@ -33,7 +33,7 @@ IGNORE_DIRS = {".git", ".github", ".githooks", "tools", "dist", "node_modules", 
 IGNORE_FILES = {"README.md", "CLAUDE.md", ".gitignore", ".nojekyll", "CNAME", "LICENSE"}
 
 # Redirect stubs: tiny pages that only forward to another URL
-STUBS = {"index.htm", "these.htm"}
+STUBS = {"index.htm", "these.htm", "en/index.html", "fr/index.html"}
 
 # --- privacy rules: anything matching must never be published -------------
 PRIVACY_PATTERNS = [
@@ -212,7 +212,7 @@ def main():
                 rep.warn(where, f"internal page {url} opens in a new tab")
 
     # Files nobody links to (the site's own plumbing excluded)
-    plumbing = {"assets/img/favicon.ico", "index.html", "index.htm", "these.htm", "robots.txt", "sitemap.xml", "404.html"}
+    plumbing = {"assets/img/favicon.ico", "index.html", "en/index.html", "fr/index.html", "index.htm", "these.htm", "robots.txt", "sitemap.xml", "404.html"}
     for rel in files:
         if rel not in referenced and rel not in plumbing:
             rep.warn(rel, "not linked from any page (orphan)")
