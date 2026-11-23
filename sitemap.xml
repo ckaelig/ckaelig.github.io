@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ckaelig.github.io/</loc></url>
-  <url><loc>https://ckaelig.github.io/phd.htm</loc></url>
-  <url><loc>https://ckaelig.github.io/waveguid.htm</loc></url>
-  <url><loc>https://ckaelig.github.io/antimatter.htm</loc></url>
-  <url><loc>https://ckaelig.github.io/hydroacoustics.htm</loc></url>
-  <url><loc>https://ckaelig.github.io/infrasound.htm</loc></url>
+  <url><loc>https://ckaelig.github.io/</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/phd.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/waveguid.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/antimatter.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/hydroacoustics.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/hydroacoustics_2.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/hydroacoustics_3.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/hydroacoustics_4.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/hydroacoustics_5.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/infrasound.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/infrasound_2.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/infrasound_3.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/infrasound_4.htm</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://ckaelig.github.io/infrasound_5.htm</loc><lastmod>2026-11-23</lastmod></url>
 </urlset>

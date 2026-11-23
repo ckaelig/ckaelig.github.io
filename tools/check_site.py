@@ -225,6 +225,11 @@ def main():
             if tag == "a" and resolved.endswith((".htm", ".html")) and a.get("target") == "_blank":
                 rep.warn(where, f"internal page {url} opens in a new tab")
 
+    # files referenced from the shared stylesheet (fonts, background images)
+    for u in re.findall(r"url\(['\"]?([^'\")]+)", shared_css):
+        if not re.match(r"[a-z]+:", u):
+            referenced.add(os.path.normpath(os.path.join("assets/css", u)).replace(os.sep, "/"))
+
     # Files nobody links to (the site's own plumbing excluded)
     plumbing = {"assets/img/favicon.ico", "index.html", "en/index.html", "fr/index.html", "index.htm", "these.htm", "robots.txt", "sitemap.xml", "404.html"}
     for rel in files:

@@ -38,6 +38,7 @@ The old host http://kaelig.castor.free.fr (HTTP only) just redirects here (see "
 - Third-party scripts: only `cdn.jsdelivr.net` (exact version pinned, e.g. `mathjax@3.2.2`) and Statcounter (after consent).
   Never polyfill.io (compromised in 2024).
 - File names are case-sensitive on GitHub Pages; keep extensions lowercase. No file over 100 MB (warning over 50 MB).
+- Fonts are self-hosted (`assets/fonts/`, declared at the top of `site.css`): never link Google Fonts again (GDPR).
 - Check visually with `tools/screenshots.sh <page>` (desktop 1366, laptop 1280, phone 390; FR + EN).
 
 ## Privacy (hard rules: the repo is public and git history is permanent)

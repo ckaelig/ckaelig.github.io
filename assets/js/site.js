@@ -149,6 +149,16 @@
         else if (action === 'toggle-menu') window.toggleMenu();
     });
 
+    // Printing / saving as PDF: show every collapsed abstract
+    window.addEventListener('beforeprint', function () {
+        var d = document.querySelectorAll('details:not([open])');
+        for (var i = 0; i < d.length; i++) { d[i].setAttribute('open', ''); d[i].setAttribute('data-print-open', ''); }
+    });
+    window.addEventListener('afterprint', function () {
+        var d = document.querySelectorAll('details[data-print-open]');
+        for (var i = 0; i < d.length; i++) { d[i].removeAttribute('open'); d[i].removeAttribute('data-print-open'); }
+    });
+
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') window.closeMenu();
     });
