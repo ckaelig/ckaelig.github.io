@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ckaelig.github.io/sitemap.xml

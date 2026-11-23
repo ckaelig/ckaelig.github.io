@@ -1,0 +1,8 @@
+#!/bin/sh
+# Refuse the commit if the site validator finds an error.
+# Enable once per clone:  git config core.hooksPath .githooks
+python3 -I tools/check_site.py >/tmp/check_site.$$ 2>&1
+status=$?
+grep -E '^(ERROR|WARN)|error\(s\)' /tmp/check_site.$$
+rm -f /tmp/check_site.$$
+[ $status -eq 0 ] || { echo "pre-commit: fix the errors above (or bypass once with --no-verify)"; exit 1; }

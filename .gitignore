@@ -1,0 +1,7 @@
+# generated free.fr package (rebuild with tools/build_freefr.py)
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini
